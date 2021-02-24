@@ -1,0 +1,40 @@
+# Python to Linux Web App on Azure
+# Build your Python project and deploy it to Azure as a Linux Web App.
+# Change python version to one thats appropriate for your application.
+# https://docs.microsoft.com/azure/devops/pipelines/languages/python
+
+trigger:
+- master
+
+variables:
+  # Azure Resource Manager connection created during pipeline creation
+  azureServiceConnectionId: 'a9615d3a-6fcf-4882-bff8-0214bc016576'
+
+  # Web app name
+  webAppName: ''
+
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+  # Environment name
+  environmentName: ''
+
+  # Project root folder. Point to the folder containing manage.py file.
+  projectRoot: $(System.DefaultWorkingDirectory)
+
+  # Python version: 3.7
+  pythonVersion: '3.7'
+
+stages:
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'NSDev ADC SystemTest CA raghuraman.sethuraman@citrix.com (1927d391-928a-4ea9-a809-fa02f6b1846b)-1830'
+    subscriptionId: '1927d391-928a-4ea9-a809-fa02f6b1846b'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'sumanth-test-pipeline'
+    location: 'East US'
+    templateLocation: 'URL of the file'
+    csmFileLink: 'https://raw.githubusercontent.com/citrix/citrix-adc-azure-templates/master/templates/high_availability/availability_set/public_vip/1nic/mainTemplate.json'
+    overrideParameters: '–adminUsername sumanth -adminPassword sumanth123$%^'
+    deploymentMode: 'Complete'
