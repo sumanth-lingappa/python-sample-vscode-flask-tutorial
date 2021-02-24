@@ -26,6 +26,6 @@ stages:
           resourceGroupName: 'sumanth-test-pipeline'
           location: 'East US'
           templateLocation: 'URL of the file'
-          csmFileLink: 'https://raw.githubusercontent.com/citrix/citrix-adc-azure-templates/master/templates/high_availability/availability_set/public_vip/1nic/mainTemplate.json'
+          csmFileLink: 'https://raw.githubusercontent.com/citrix/citrix-adc-azure-templates/master/templates/high_availability/availability_set/public_vip/3nic/mainTemplate.json'
           overrideParameters: '–adminUsername sumanth -adminPassword sumanth123$%^'
           deploymentMode: 'Complete'
